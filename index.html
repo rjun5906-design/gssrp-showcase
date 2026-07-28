@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GSSRP 2026 — Predicting Student Outcomes with Machine Learning</title>
-<meta name="description" content="Four GSSRP 2026 research projects applying machine learning to student performance, teaching quality, and mental health — with posters, live apps, and code.">
+<title>Predictive Performance Analysts — GSSRP 2026, Kean University</title>
+<meta name="description" content="Predictive Performance Analysts: four GSSRP 2026 research projects at Kean University applying machine learning to student performance, teaching quality, and mental health — with posters, live apps, and code.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,11 +41,19 @@
   /* ── header ───────────────────────────────────────── */
   .bar{
     position:sticky;top:0;z-index:40;
-    background:color-mix(in srgb, var(--paper) 90%, transparent);
+    background:color-mix(in srgb, var(--paper) 92%, transparent);
     backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);
+    box-shadow:0 1px 0 rgba(19,20,23,.02), 0 6px 16px -12px rgba(19,20,23,.18);
   }
-  .bar .wrap{display:flex;align-items:center;gap:1.5rem;padding-block:.8rem}
-  .mark{font-weight:700;font-size:.95rem;letter-spacing:-.01em;text-decoration:none}
+  .bar .wrap{display:flex;align-items:center;gap:1.5rem;padding-block:.65rem}
+  .brand-block{display:flex;align-items:center;gap:.65rem;text-decoration:none;min-width:0}
+  .brand-logo{width:36px;height:36px;object-fit:contain;flex:0 0 auto}
+  .brand-text{display:flex;flex-direction:column;justify-content:center;line-height:1.2;min-width:0}
+  .mark{font-weight:700;font-size:.95rem;letter-spacing:-.01em;white-space:nowrap}
+  .brand-sub{
+    font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted);white-space:nowrap;
+  }
   .bar nav{margin-left:auto;display:flex;gap:1.4rem}
   .bar nav a{
     font-size:.875rem;color:var(--muted);text-decoration:none;
@@ -53,6 +61,24 @@
     transition:color .18s,border-color .18s;
   }
   .bar nav a:hover{color:var(--ink);border-bottom-color:var(--accent)}
+  .header-right{
+    display:flex;align-items:center;gap:.9rem;
+    padding-left:1.1rem;margin-left:.4rem;border-left:1px solid var(--rule);
+  }
+  .kean-logo{width:32px;height:32px;object-fit:contain;flex:0 0 auto}
+  .visitor-pill{
+    display:flex;align-items:center;gap:.4rem;
+    font-family:var(--mono);font-size:.66rem;letter-spacing:.03em;
+    color:var(--accent);background:var(--accent-soft);
+    padding:.32rem .65rem;border-radius:100px;white-space:nowrap;
+  }
+  .visitor-pill .dot{
+    width:6px;height:6px;border-radius:50%;background:#2E9E5B;flex:0 0 auto;
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  @media (max-width:860px){ .header-right{display:none} }
+  @media (max-width:560px){ .brand-sub{display:none} }
 
   /* ── section scaffolding ──────────────────────────── */
   section{padding-block:clamp(2.75rem,6vw,4.75rem)}
@@ -248,13 +274,23 @@
 
 <header class="bar">
   <div class="wrap">
-    <a class="mark" href="#top" id="brand">—</a>
+    <a class="brand-block" href="#top">
+      <img class="brand-logo" src="logo-site.png" alt="">
+      <span class="brand-text">
+        <span class="mark" id="brand">—</span>
+        <span class="brand-sub" id="brand-sub"></span>
+      </span>
+    </a>
     <nav>
       <a href="#posters">Posters</a>
       <a href="#apps">Apps</a>
       <a href="#code">Code</a>
       <a href="#team">Team</a>
     </nav>
+    <div class="header-right">
+      <img class="kean-logo" src="logo-kean.png" alt="Kean University">
+      <span class="visitor-pill"><span class="dot"></span><span id="visitor-count">Loading…</span></span>
+    </div>
   </div>
 </header>
 
@@ -311,7 +347,8 @@
 
 const SITE = {
 
-  group: "GSSRP 2026 \u00b7 Kean University",
+  group: "Predictive Performance Analysts",
+  program: "GSSRP 2026 \u00b7 Kean University",
   title: "Predicting student performance, teaching quality, and mental health with machine learning.",
   lede:  "Four independent research projects from Kean University's Governor's School Summer Research Program, each pointing supervised machine learning at a different piece of the same question \u2014 what in a student's data actually predicts outcomes, and what doesn't.",
   facts: ["7 people", "4 research projects", "4 posters", "2 live apps", "GSSRP 2026", "Kean University"],
@@ -381,7 +418,7 @@ const SITE = {
     { name:"Lia Trenery",          role:"Research Assistant", bio:"Kean University. Supervised all four projects.",                                                                   photo:"lia.jpg",         link:"" }
   ],
 
-  footer: ["\u00a9 2026 GSSRP Student Research", "Kean University", "github.com/rjun5906-design"]
+  footer: ["\u00a9 2026 Predictive Performance Analysts", "GSSRP 2026 \u00b7 Kean University", "github.com/rjun5906-design"]
 };
 
 /* ══════════════════════════════════════════════════════════════
@@ -393,6 +430,7 @@ const esc = (s) => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>
 const initials = (n) => n.replace(/^(Dr|Prof)\.?\s+/i,'').split(/\s+/).slice(0,2).map(w => w[0]).join('').toUpperCase();
 
 $('#brand').textContent = SITE.group;
+$('#brand-sub').textContent = SITE.program;
 document.title = SITE.group + ' \u2014 Research Showcase';
 $('#h-title').textContent = SITE.title;
 $('#h-lede').textContent = SITE.lede;
@@ -535,6 +573,22 @@ if (!reduced && 'IntersectionObserver' in window) {
 } else {
   document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-in'));
 }
+
+/* live visitor counter — free, no-signup hit counter API */
+(function(){
+  const el = $('#visitor-count');
+  if (!el) return;
+  fetch('https://abacus.jasoncameron.dev/hit/gssrp-predictive-performance-analysts/homepage')
+    .then(r => r.json())
+    .then(data => {
+      if (data && typeof data.value === 'number') {
+        el.textContent = data.value.toLocaleString() + ' visitors';
+      } else {
+        el.textContent = 'Visitors';
+      }
+    })
+    .catch(() => { el.textContent = 'Visitors'; });
+})();
 </script>
 
 </body>
