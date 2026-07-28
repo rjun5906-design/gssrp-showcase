@@ -45,14 +45,14 @@
     backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);
     box-shadow:0 1px 0 rgba(19,20,23,.02), 0 6px 16px -12px rgba(19,20,23,.18);
   }
-  .bar .wrap{display:flex;align-items:center;gap:1.5rem;padding-block:.65rem}
-  .brand-block{display:flex;align-items:center;gap:.65rem;text-decoration:none;min-width:0}
-  .brand-logo{width:36px;height:36px;object-fit:contain;flex:0 0 auto}
+  .bar .wrap{display:flex;align-items:center;gap:1.5rem;padding-block:.55rem}
+  .brand-block{display:flex;align-items:center;gap:.85rem;text-decoration:none;min-width:0}
+  .brand-logo{width:58px;height:58px;object-fit:contain;flex:0 0 auto}
   .brand-text{display:flex;flex-direction:column;justify-content:center;line-height:1.2;min-width:0}
-  .mark{font-weight:700;font-size:.95rem;letter-spacing:-.01em;white-space:nowrap}
+  .mark{font-weight:700;font-size:1.2rem;letter-spacing:-.015em;white-space:nowrap}
   .brand-sub{
-    font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.08em;
-    text-transform:uppercase;color:var(--muted);white-space:nowrap;
+    font-family:var(--mono);font-size:.66rem;font-weight:500;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted);white-space:nowrap;margin-top:.15rem;
   }
   .bar nav{margin-left:auto;display:flex;gap:1.4rem}
   .bar nav a{
@@ -65,7 +65,7 @@
     display:flex;align-items:center;gap:.9rem;
     padding-left:1.1rem;margin-left:.4rem;border-left:1px solid var(--rule);
   }
-  .kean-logo{width:32px;height:32px;object-fit:contain;flex:0 0 auto}
+  .kean-logo{width:40px;height:40px;object-fit:contain;flex:0 0 auto}
   .visitor-pill{
     display:flex;align-items:center;gap:.4rem;
     font-family:var(--mono);font-size:.66rem;letter-spacing:.03em;
@@ -582,7 +582,7 @@ if (!reduced && 'IntersectionObserver' in window) {
     .then(r => r.json())
     .then(data => {
       if (data && typeof data.value === 'number') {
-        el.textContent = data.value.toLocaleString() + ' visitors';
+        el.textContent = data.value.toLocaleString() + (data.value === 1 ? ' visitor' : ' visitors');
       } else {
         el.textContent = 'Visitors';
       }
